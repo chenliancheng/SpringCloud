@@ -1,7 +1,4 @@
-*.imp
-
+*.iml
 *.ipr
-
 *.iws
-
 target/
