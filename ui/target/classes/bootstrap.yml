@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: ui
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+server:
+  port: 8008
+zuul:
+  routes:
+    api-a:
+      path: /some/**
+      service-id: someconfig
+    api-b:
+      path: /person/**
+      service-id: person
+

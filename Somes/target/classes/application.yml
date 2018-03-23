@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: someconfig
+  cloud:
+    config:
+      #uri: http://localhost:8002
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: config
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+server:
+  port: 8004
+#feign:
+ # hystrix:
+  #  enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000

@@ -1,0 +1,13 @@
+server:
+  port: 8005
+spring:
+  application:
+    name: person
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      instance-id: ${spring.cloud.client.ipAddress}:${server.port}
