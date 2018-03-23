@@ -1,4 +1,7 @@
-.imp
-.ipr
-.iws
-/target
+*.imp
+
+*.ipr
+
+*.iws
+
+target/
