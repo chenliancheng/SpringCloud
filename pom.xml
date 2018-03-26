@@ -25,11 +25,6 @@
     <module>person</module>
     <module>Somes</module>
     <module>monitor</module>
-    <module>config</module>
-    <module>discovery</module>
-    <module>person</module>
-    <module>ui</module>
-    <module>monitor</module>
   </modules>
   <dependencies>
     <dependency>
