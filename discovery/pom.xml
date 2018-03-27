@@ -23,6 +23,8 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
@@ -38,19 +40,21 @@
                         </goals>
                     </execution>
                 </executions>
-
                 <configuration>
-                <imageName>eureka:0.0.1</imageName>
-                <baseImage>lwieske/java-8</baseImage>
+                   <!-- <forceTags>true</forceTags>--><!--覆盖镜像-->
+                   <!-- <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>--><!--使用dockerfile构建镜像-->
+                    <imageName>eureka:0.0.1</imageName>
+                    <baseImage>lwieske/java-8</baseImage>
                     <dockerHost>http://192.168.10.72:2375</dockerHost>
-                <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
-                <resources>
-                    <resource>
-                    <targetPath>/</targetPath>
-                        <directory>${project.build.directory}</directory>
-                        <include>${project.build.finalName}</include>
-                    </resource>
-                </resources>
+                    <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <!--<serverId>mydockerhub</serverId>--><!--推送镜像到仓库-->
                 </configuration>
             </plugin>
         </plugins>

@@ -23,4 +23,61 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+               <executions>
+                   <execution>
+                       <id>package-build</id>
+                       <goals>
+                           <goal>build</goal>
+                       </goals>
+                       <phase>package</phase>
+                   </execution>
+                   <execution>
+                       <id>image-tag</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>tag</goal>
+                       </goals>
+                       <configuration>
+                           <image>serrs/person:0.0.1</image>
+                           <newName>192.168.10.72:5000/serrs/person:0.0.1</newName>
+                       </configuration>
+                   </execution>
+                   <execution>
+                       <id>package-push</id>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>push</goal>
+                       </goals>
+                       <configuration>
+                           <imageName>192.168.10.72:5000/serrs/person:0.0.1</imageName>
+                       </configuration>
+                   </execution>
+
+               </executions>
+                <configuration>
+
+                <forceTags>true</forceTags>
+                    <!--<registryUrl>http://192.168.10.72:5000</registryUrl>--><!--可不要-->
+                    <imageName>serrs/person:0.0.1</imageName>
+                    <dockerHost>http://192.168.10.72:2375</dockerHost>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <!--<pushImage>true</pushImage>--><!--如果加上install的时候也会push-->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
